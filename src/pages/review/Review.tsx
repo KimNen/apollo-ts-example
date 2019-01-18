@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Table, TableHead, TableBody, TableCell, TableRow, Button, MenuItem, TextField } from '@material-ui/core';
 import { Query } from 'react-apollo';
 import * as reviewGql from '../../graphql/query/review';
-import Loading from '../loading'
-import Error from '../error'
+import Loading from '../loading/Loading'
+import Error from '../error/Error'
 import Blank from '../blank'
 
 interface IRowData {

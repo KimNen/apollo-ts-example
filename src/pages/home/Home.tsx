@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { Query } from 'react-apollo';
 import * as heroGql from '../../graphql/query/hero';
-import Loading from '../loading'
-import Error from '../error'
+import Loading from '../loading/Loading'
+import Error from '../error/Error'
 import { Table } from 'reactstrap';
 import './Home.css'
 
