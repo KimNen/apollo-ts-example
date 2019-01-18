@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 import {
     Collapse,
     Navbar,
@@ -12,14 +13,35 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
+import './Header.css';
 
 class Header extends React.Component < any, any > {
 
     constructor(props) {
         super(props)
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isScrolled : false,
         };
+    }
+
+    public componentDidMount () {
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    public componentWillUnmount () {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    public handleScroll = (e) => {
+        console.log(window.scrollY)
+        if (window.scrollY > 0) {
+            if (this.state.isScrolled === false) {
+                this.setState({ isScrolled: true, showLanguage : false });
+            }
+        } else if (this.state.isScrolled) {
+            this.setState({ isScrolled: false });
+        }
     }
 
     public toggle() {
@@ -29,8 +51,13 @@ class Header extends React.Component < any, any > {
     }
 
     public render() {
+        console.log(this.state.isScrolled)
         return (
-            <div>
+            <div className={
+                classnames({
+                    'Header' : true,
+                    'fixed' : this.state.isScrolled
+                })}>
                 <Navbar color="light" light={true} expand="md">
                     <NavbarBrand href="/">reactstrap</NavbarBrand>
                     <NavbarToggler onClick={() => this.toggle()} />
@@ -47,18 +74,17 @@ class Header extends React.Component < any, any > {
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
-                                Options
+                                <Link to="/hero">Hero</Link>
                             </DropdownToggle>
                             <DropdownMenu right>
                             <DropdownItem>
-                                Option 1
+                                Character
                             </DropdownItem>
                             <DropdownItem>
-                                Option 2
+                                Human
                             </DropdownItem>
-                            <DropdownItem divider />
                             <DropdownItem>
-                                Reset
+                                Friends
                             </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>

@@ -45,9 +45,8 @@ class Review extends React.Component<any, IReviewState> {
     }
 
     public render() {
-        console.log('aa')
         return (
-            <React.Fragment>
+            <div className="Review">
                 <div className="table-header">
                     <Link to="/review/edit">
                         <Button>리뷰 추가</Button>
@@ -82,7 +81,7 @@ class Review extends React.Component<any, IReviewState> {
                         console.log(data)
                         return (
                             <React.Fragment>
-                                <div>
+                                <div className="table">
                                     <Table>
                                         <TableHead>
                                             <TableRow>
@@ -111,7 +110,7 @@ class Review extends React.Component<any, IReviewState> {
                         )
                     }}
                 </Query>
-            </React.Fragment>
+            </div>
             )
     }
 }

@@ -23,7 +23,7 @@ const episode = [
 ]
 
 interface IEditState {
-    episode : string;
+    episodeState : string;
     commentary : string;
 }
 
@@ -32,7 +32,7 @@ class ReviewEdit extends React.Component <IEditProps, IEditState>{
     constructor(props) {
         super(props);
         this.state= {
-            episode : '' ,
+            episodeState : 'EMPIRE' ,
             commentary : ''
         }
     }
@@ -44,11 +44,11 @@ class ReviewEdit extends React.Component <IEditProps, IEditState>{
     }
 
     public handleSubmit = (e, createReview) => {
-        const { episode, commentary } = this.state;
+        const { episodeState, commentary } = this.state;
         e.preventDefault();
         createReview({
             variables : {
-                Epi : episode,
+                Epi : episodeState,
                 Input : {
                     stars : 1,
                     commentary : commentary,
@@ -65,11 +65,13 @@ class ReviewEdit extends React.Component <IEditProps, IEditState>{
 
     public render() {
 
+        const { episodeState } = this.state;
+
         return (
             <div className="fadeIn">
 
                 <Mutation mutation={reviewMutation.createReview()}
-                    refetchQueries={[{ query: reviewQuery.getReview('EMPIRE') }]}>
+                    refetchQueries={[{ query: reviewQuery.getReview(episodeState) }]}>
                     {(createReview) => (
                         <form className="container" noValidate autoComplete="off" onSubmit={
                             (e) => this.handleSubmit(e, createReview)
@@ -79,9 +81,9 @@ class ReviewEdit extends React.Component <IEditProps, IEditState>{
                                     id="outlined-select-episode"
                                     select
                                     label="Episode"
-                                    name="episode"
+                                    name="episodeState"
                                     className="textField"
-                                    value={this.state.episode}
+                                    value={episodeState}
                                     onChange={this.handleChange}
                                     margin="normal"
                                     variant="outlined"

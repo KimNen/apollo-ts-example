@@ -9,8 +9,16 @@
     "apollo-boost": "^0.1.23",
     "apollo-cache-inmemory": "^1.3.12",
     "apollo-client": "^2.4.8",
+    "autoprefixer": "^9.4.5",
     "bootstrap": "^4.2.1",
+    "classnames": "^2.2.6",
     "graphql": "^14.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^6.1.1",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.1.1",
+    "postcss-preset-env": "^6.5.0",
     "react": "^16.7.0",
     "react-apollo": "^2.3.3",
     "react-dom": "^16.7.0",
@@ -21,10 +29,16 @@
     "reactstrap": "^7.0.2"
   },
   "scripts": {
-    "start": "PORT=5000 react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "post-css": "postcss src/styles/bundle.css -o src/styles/compiled.css --use lost",
+    "post-css-watch": "postcss src/styles/bundle.css -o src/styles/compiled.css --use lost -w",
+    "build-css": "node-sass src/ -o src/ && npm run post-css",
+    "watch-css": "postcss src/styles/main.css -o src/index.css -w",
+    "start": "PORT=5000 npm-run-all -p watch-css post-css-watch start-js",
+    "start-js": "react-scripts-ts start",
+    "build-js": "react-scripts-ts build",
+    "build": "npm-run-all build:css build-js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.5",

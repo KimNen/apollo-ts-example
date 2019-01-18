@@ -2,7 +2,8 @@ import * as React from 'react'
 import { Switch, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
 import review from './pages/review/Review'
-import reviewEdit from './pages/review/ReviewEdit'
+import reviewEdit from './pages/review/ReviewEdit';
+import heroList from './pages/hero/Hero';
 
 type Prop = {}
 
@@ -17,6 +18,7 @@ class Router extends React.Component<Prop, State> {
             <Route exact path="/" component={Home} />
             <Route exact path="/review" component={review} />
             <Route path='/review/edit' component={reviewEdit} />
+            <Route path='/hero' component={heroList}/>
           </Switch>
         );
       }
