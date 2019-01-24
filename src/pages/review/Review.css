@@ -3,12 +3,14 @@
     height : 500px;
 }
 
-.table{
-    
-}
-
 .Review {
     display: block;
     margin : 50px auto;
     width: 50%;
+}
+
+.ReviewEdit { 
+    display: block;
+    margin: 50px auto;
+    width : 1080px;
 }

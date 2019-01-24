@@ -68,7 +68,7 @@ class ReviewEdit extends React.Component <IEditProps, IEditState>{
         const { episodeState } = this.state;
 
         return (
-            <div className="fadeIn">
+            <div className="fadeIn ReviewEdit">
 
                 <Mutation mutation={reviewMutation.createReview()}
                     refetchQueries={[{ query: reviewQuery.getReview(episodeState) }]}>

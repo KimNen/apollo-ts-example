@@ -31,14 +31,15 @@
   "scripts": {
     "post-css": "postcss src/styles/bundle.css -o src/styles/compiled.css --use lost",
     "post-css-watch": "postcss src/styles/bundle.css -o src/styles/compiled.css --use lost -w",
-    "build-css": "node-sass src/ -o src/ && npm run post-css",
+    "build-css": "postcss src/ -o src/ && npm run post-css",
     "watch-css": "postcss src/styles/main.css -o src/index.css -w",
     "start": "PORT=5000 npm-run-all -p watch-css post-css-watch start-js",
     "start-js": "react-scripts-ts start",
     "build-js": "react-scripts-ts build",
-    "build": "npm-run-all build:css build-js",
+    "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server" : "node build/server/bundle.js"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.5",

@@ -4,6 +4,7 @@ import Home from './pages/home/Home';
 import review from './pages/review/Review'
 import reviewEdit from './pages/review/ReviewEdit';
 import heroList from './pages/hero/Hero';
+import humanList from './pages/human/Human';
 
 type Prop = {}
 
@@ -19,6 +20,7 @@ class Router extends React.Component<Prop, State> {
             <Route exact path="/review" component={review} />
             <Route path='/review/edit' component={reviewEdit} />
             <Route path='/hero' component={heroList}/>
+            <Route path='/human' component={humanList}/>
           </Switch>
         );
       }

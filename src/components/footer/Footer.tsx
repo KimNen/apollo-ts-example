@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-// import styles from './index.scss';
+import './Footer.css';
 
 // export interface ICommonProps {
 //     name: string;
@@ -20,15 +20,11 @@ class Footer extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
-
-        this.state = {
-            ccc: 'asdad',
-        }
     }
 
     public render() {
         return (
-            <div>
+            <div className="Footer">
                 FooterPagefdsfaf
             </div>
         )

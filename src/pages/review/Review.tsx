@@ -6,6 +6,7 @@ import * as reviewGql from '../../graphql/query/review';
 import Loading from '../loading/Loading'
 import Error from '../error/Error'
 import Blank from '../blank'
+import client from 'src/components/client';
 
 interface IRowData {
     episode: string;
@@ -14,7 +15,7 @@ interface IRowData {
 }
 
 interface IReviewState {
-    episode: string;
+    episode : string;
 }
 
 const episode = [
@@ -38,10 +39,20 @@ class Review extends React.Component<any, IReviewState> {
         }
     }
 
-    public handleChange = (name: string) => (e) => {
+    private handleChange = (e : React.ChangeEvent<HTMLInputElement>) : void => {
         this.setState({
-            episode: e.target.value
+            ...this.state,
+            [e.target.name] : e.target.value
         })
+    }
+
+    componentDidMount = () => {}
+
+    ButtonClick = () => {
+        const todo = client.readQuery({
+            query : reviewGql.getReview(this.state.episode),
+        })
+        console.log('Todo : ',todo)
     }
 
     public render() {
@@ -51,6 +62,7 @@ class Review extends React.Component<any, IReviewState> {
                     <Link to="/review/edit">
                         <Button>리뷰 추가</Button>
                     </Link>
+                    <Button onClick={() => this.ButtonClick()}>ReadQuery</Button>
                     <TextField
                         id="outlined-select-episode"
                         select
@@ -58,7 +70,7 @@ class Review extends React.Component<any, IReviewState> {
                         name="episode"
                         className="textField"
                         value={this.state.episode}
-                        onChange={this.handleChange('episode')}
+                        onChange={this.handleChange}
                         margin="normal"
                         variant="outlined"
                     >
@@ -73,12 +85,17 @@ class Review extends React.Component<any, IReviewState> {
                 <Query
                     query={reviewGql.getReview(this.state.episode)}
                     partialRefetch={true}
+                    // variables={{ //쿼리에 들어갈 값을 이런식으로 넣어줄 수도 있음
+                    //     type: match.params.type.toUpperCase() || "TOP",
+                    //     offset: 0,
+                    //     limit: 10
+                    //   }}
+                    //   fetchPolicy="cache-and-network"
                 >
                     {({ loading, error, data }) => {
                         if (loading) return <Loading />
                         if (error) return <Error />
                         if (!data) return <Blank />
-                        console.log(data)
                         return (
                             <React.Fragment>
                                 <div className="table">
@@ -92,7 +109,6 @@ class Review extends React.Component<any, IReviewState> {
                                         </TableHead>
                                         <TableBody>
                                             {data.reviews.map((row: IRowData, idx) => {
-                                                console.log(row)
                                                 return (
                                                     <TableRow className="tableRow" key={idx}>
                                                         <TableCell component="th" scope="row">

@@ -34,10 +34,9 @@ class Header extends React.Component < any, any > {
     }
 
     public handleScroll = (e) => {
-        console.log(window.scrollY)
         if (window.scrollY > 0) {
             if (this.state.isScrolled === false) {
-                this.setState({ isScrolled: true, showLanguage : false });
+                this.setState({ isScrolled: true });
             }
         } else if (this.state.isScrolled) {
             this.setState({ isScrolled: false });
@@ -51,7 +50,6 @@ class Header extends React.Component < any, any > {
     }
 
     public render() {
-        console.log(this.state.isScrolled)
         return (
             <div className={
                 classnames({
@@ -81,7 +79,7 @@ class Header extends React.Component < any, any > {
                                 Character
                             </DropdownItem>
                             <DropdownItem>
-                                Human
+                                <Link to="/human">Human</Link>
                             </DropdownItem>
                             <DropdownItem>
                                 Friends
